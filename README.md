@@ -10,6 +10,7 @@ to provide a golang idiomatic API but staying also close as possible to
 Except of Hamlib (C), goHamlib has no other external dependencies.
 
 goHamlib is compatible with both, Hamlib 1.2.x and 3.x.
+This version of goHamlib is compatible with Hamlib 4.7 (4.x ?)
 
 You might also want to checkout [gorigctl](https://github.com/dh1tw/gorigctl)
 which is a drop-in replacement for hamlib's rigctl, although it comes with a
