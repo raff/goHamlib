@@ -1,3 +1,4 @@
+#include <errno.h>
 #include <stdio.h>
 #include <string.h>
 // #include <unistd.h>
@@ -38,6 +39,9 @@ RIG* init_rig(int rig_model)
 int open_rig(RIG *myrig)
 {
 	int res = rig_open(myrig);
+        if (res == 0) {
+            errno = 0;
+        }
 	return res;
 }
 
