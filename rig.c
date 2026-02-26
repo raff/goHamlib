@@ -24,7 +24,7 @@ int set_port(RIG *myrig,int rig_port_type, char* portname, int baudrate, int dat
 	myrig->state.rigport.parm.serial.stop_bits = stopbits;
 	myrig->state.rigport.parm.serial.parity = parity;
 	myrig->state.rigport.parm.serial.handshake = handshake;
-	strncpy(myrig->state.rigport.pathname, portname, FILPATHLEN - 1);
+	strncpy(myrig->state.rigport.pathname, portname, HAMLIB_FILPATHLEN - 1);
 	// printf("path: %s\n", portname);
 	// printf("path: %s\n", myrig->state.rigport.pathname);
 	return 0;
@@ -65,7 +65,7 @@ int has_get_vfo(RIG *myrig)
 	return RIG_ENIMPL;
 }
 
-int get_vfo(RIG *myrig,int *vfo)
+int get_vfo(RIG *myrig, vfo_t *vfo)
 {
 	int res = rig_get_vfo(myrig, vfo);
 	return res;
@@ -327,7 +327,7 @@ int has_get_split_vfo(RIG *myrig)
 	return RIG_ENIMPL;
 }
 
-int get_split_vfo(RIG *myrig, int vfo, int *split, int *tx_vfo)
+int get_split_vfo(RIG *myrig, int vfo, int *split, vfo_t *tx_vfo)
 {
 	split_t* sp = (split_t*)split;
 	int res = rig_get_split_vfo(myrig, vfo, sp, tx_vfo);
@@ -405,7 +405,8 @@ int has_set_ant(RIG *myrig)
 
 int set_ant(RIG *myrig, int vfo, int ant)
 {
-	int res = rig_set_ant(myrig, vfo, ant);
+	value_t v = {.i = 0};
+	int res = rig_set_ant(myrig, vfo, ant, v);
 	return res;
 }
 
@@ -418,9 +419,9 @@ int has_get_ant(RIG *myrig)
 	return RIG_ENIMPL;
 }
 
-int get_ant(RIG *myrig, int vfo, int *ant)
+int get_ant(RIG *myrig, int vfo, ant_t *ant)
 {
-	int res = rig_get_ant(myrig, vfo, ant);
+	int res = rig_get_ant(myrig, vfo, RIG_ANT_CURR, NULL, ant, NULL, NULL);
 	return res;
 }
 
@@ -524,7 +525,8 @@ int get_conf(RIG *myrig, char* token, char* val)
 		return -RIG_EINVAL;
 	}
 	
-	int res = rig_get_conf(myrig, t, val);
+        // assume val has been initialize (with blank) so we can get the length
+	int res = rig_get_conf2(myrig, t, val, strlen(val));
 	return res; 
 }
 
@@ -580,7 +582,7 @@ int get_level(RIG *myrig, int vfo, unsigned long level, float *value)
 		case RIG_LEVEL_CWPITCH:
 		case RIG_LEVEL_KEYSPD:
 		case RIG_LEVEL_NOTCHF:
-		case RIG_LEVEL_VOX:
+		case RIG_LEVEL_VOXDELAY:
 		case RIG_LEVEL_BKINDL:
 		case RIG_LEVEL_METER:
 		case RIG_LEVEL_STRENGTH:
@@ -649,7 +651,7 @@ int get_level_gran(RIG *myrig, unsigned long level, float *step, float *min, flo
 		case RIG_LEVEL_CWPITCH:
 		case RIG_LEVEL_KEYSPD:
 		case RIG_LEVEL_NOTCHF:
-		case RIG_LEVEL_VOX:
+		case RIG_LEVEL_VOXDELAY:
 		case RIG_LEVEL_BKINDL:
 		case RIG_LEVEL_METER:
 		case RIG_LEVEL_STRENGTH:
@@ -699,7 +701,7 @@ int set_level(RIG *myrig, int vfo, unsigned long level, float value)
 		case RIG_LEVEL_CWPITCH:
 		case RIG_LEVEL_KEYSPD:
 		case RIG_LEVEL_NOTCHF:
-		case RIG_LEVEL_VOX:
+		case RIG_LEVEL_VOXDELAY:
 		case RIG_LEVEL_BKINDL:
 		case RIG_LEVEL_METER:
 		case RIG_LEVEL_SLOPE_LOW:
@@ -883,7 +885,7 @@ int get_supported_modes(RIG *myrig, int *modes)
 int get_filter_count(RIG *myrig, int *filter_count)
 {
 	int i;
-	for (i=0; i<FLTLSTSIZ && !RIG_IS_FLT_END(myrig->caps->filters[i]); i++)
+	for (i=0; i<HAMLIB_FLTLSTSIZ && !RIG_IS_FLT_END(myrig->caps->filters[i]); i++)
 	{
 		*filter_count += 1;
 	}
