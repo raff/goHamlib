@@ -192,39 +192,39 @@ func (rig *Rig) Init(rigModel RigModelID) error {
 
 // Set Port of Rig
 func (rig *Rig) SetPort(p Port) error {
-	res, err := C.set_port(rig.handle, C.int(p.RigPortType), C.CString(p.Portname), C.int(p.Baudrate), C.int(p.Databits), C.int(p.Stopbits), C.int(p.Parity), C.int(p.Handshake))
-	return checkError(res, err, "set_port")
+	res := C.set_port(rig.handle, C.int(p.RigPortType), C.CString(p.Portname), C.int(p.Baudrate), C.int(p.Databits), C.int(p.Stopbits), C.int(p.Parity), C.int(p.Handshake))
+	return checkError(res, nil, "set_port")
 }
 
 // Open Radio / Port
 func (rig *Rig) Open() error {
-	res, err := C.open_rig(rig.handle)
-	return checkError(res, err, "open_rig")
+	res := C.open_rig(rig.handle)
+	return checkError(res, nil, "open_rig")
 }
 
 // SetVfo sets the default VFO
 func (rig *Rig) SetVfo(vfo VFOType) error {
-	res, err := C.set_vfo(rig.handle, C.int(vfo))
-	return checkError(res, err, "set_vfo")
+	res := C.set_vfo(rig.handle, C.int(vfo))
+	return checkError(res, nil, "set_vfo")
 }
 
 // GetVfo returns the default VFO
 func (rig *Rig) GetVfo() (VFOType, error) {
 	var v C.int
-	res, err := C.get_vfo(rig.handle, &v)
-	return VFOType(v), checkError(res, err, "get_vfo")
+	res := C.get_vfo(rig.handle, &v)
+	return VFOType(v), checkError(res, nil, "get_vfo")
 }
 
 // SetFreq sets the Frequency for a VFO
 func (rig *Rig) SetFreq(vfo VFOType, freq float64) error {
-	res, err := C.set_freq(rig.handle, C.int(vfo), C.double(freq))
-	return checkError(res, err, "set_freq")
+	res := C.set_freq(rig.handle, C.int(vfo), C.double(freq))
+	return checkError(res, nil, "set_freq")
 }
 
 // SetMode sets the Mode for a VFO
 func (rig *Rig) SetMode(vfo VFOType, mode Mode, pbWidth int) error {
-	res, err := C.set_mode(rig.handle, C.int(vfo), C.int(mode), C.int(pbWidth))
-	return checkError(res, err, "set_mode")
+	res := C.set_mode(rig.handle, C.int(vfo), C.int(mode), C.int(pbWidth))
+	return checkError(res, nil, "set_mode")
 }
 
 // Find the next suitable narrow available filter
@@ -255,9 +255,9 @@ func (rig *Rig) GetPbWide(mode Mode) (int, error) {
 func (rig *Rig) GetFreq(vfo VFOType) (freq float64, err error) {
 	var f C.double
 	var res C.int
-	res, err = C.get_freq(rig.handle, C.int(vfo), &f)
+	res = C.get_freq(rig.handle, C.int(vfo), &f)
 	freq = float64(f)
-	return freq, checkError(res, err, "get_freq")
+	return freq, checkError(res, nil, "get_freq")
 }
 
 // GetMode gets the Mode and Passband width for a VFO
@@ -400,31 +400,31 @@ func (rig *Rig) SetAnt(vfo VFOType, ant int) error {
 // Get Antenna
 func (rig *Rig) GetAnt(vfo VFOType) (ant int, err error) {
 	var a C.int
-	res, err := C.get_ant(rig.handle, C.int(vfo), &a)
+	res := C.get_ant(rig.handle, C.int(vfo), &a)
 	ant = int(a)
-	return ant, checkError(res, err, "get_ant")
+	return ant, checkError(res, nil, "get_ant")
 }
 
 // Set Tuning step
 func (rig *Rig) SetTs(vfo VFOType, ts int) error {
-	res, err := C.set_ts(rig.handle, C.int(vfo), C.int(ts))
-	return checkError(res, err, "set_ts")
+	res := C.set_ts(rig.handle, C.int(vfo), C.int(ts))
+	return checkError(res, nil, "set_ts")
 }
 
 // Get Tuning step
 func (rig *Rig) GetTs(vfo VFOType) (ts int, err error) {
 	var t C.long
-	res, err := C.get_ts(rig.handle, C.int(vfo), &t)
+	res := C.get_ts(rig.handle, C.int(vfo), &t)
 	ts = int(t)
-	return ts, checkError(res, err, "get_ts")
+	return ts, checkError(res, nil, "get_ts")
 }
 
 // has supports getting a specific level
 func (rig *Rig) HasGetLevel(level uint32) (res uint32, err error) {
 	var c C.ulong
-	c, err = C.has_get_level(rig.handle, C.ulong(level))
+	c = C.has_get_level(rig.handle, C.ulong(level))
 	res = uint32(c)
-	return res, checkError(0, err, "has_get_level")
+	return res, checkError(C.int(c), nil, "has_get_level")
 }
 
 // get the best frequency resolution for this rig (minimum step size)
