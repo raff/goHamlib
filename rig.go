@@ -265,123 +265,123 @@ func (rig *Rig) GetMode(vfo VFOType) (mode Mode, pb_width int, err error) {
 	var m C.int
 	var pb C.long
 	var res C.int
-	res, err = C.get_mode(rig.handle, C.int(vfo), &m, &pb)
+	res = C.get_mode(rig.handle, C.int(vfo), &m, &pb)
 	pb_width = int(pb)
 	mode = Mode(m)
-	return mode, pb_width, checkError(res, err, "get_mode")
+	return mode, pb_width, checkError(res, nil, "get_mode")
 }
 
 // Set Ptt
 func (rig *Rig) SetPtt(vfo VFOType, ptt int) error {
-	res, err := C.set_ptt(rig.handle, C.int(vfo), C.int(ptt))
-	return checkError(res, err, "set_ptt")
+	res := C.set_ptt(rig.handle, C.int(vfo), C.int(ptt))
+	return checkError(res, nil, "set_ptt")
 }
 
 // Get Ptt state
 func (rig *Rig) GetPtt(vfo VFOType) (ptt int, err error) {
 	var p C.int
-	res, err := C.get_ptt(rig.handle, C.int(vfo), &p)
+	res := C.get_ptt(rig.handle, C.int(vfo), &p)
 	ptt = int(p)
-	return ptt, checkError(res, err, "get_ptt")
+	return ptt, checkError(res, nil, "get_ptt")
 }
 
 // Set Rit offset value
 func (rig *Rig) SetRit(vfo VFOType, offset int) error {
-	res, err := C.set_rit(rig.handle, C.int(vfo), C.int(offset))
-	return checkError(res, err, "set_rit")
+	res := C.set_rit(rig.handle, C.int(vfo), C.int(offset))
+	return checkError(res, nil, "set_rit")
 }
 
 // Get Rit offset value
 func (rig *Rig) GetRit(vfo VFOType) (offset int, err error) {
 	var o C.long
-	res, err := C.get_rit(rig.handle, C.int(vfo), &o)
+	res := C.get_rit(rig.handle, C.int(vfo), &o)
 	offset = int(o)
-	return offset, checkError(res, err, "get_rit")
+	return offset, checkError(res, nil, "get_rit")
 }
 
 // Set Xit offset value
 func (rig *Rig) SetXit(vfo VFOType, offset int) error {
-	res, err := C.set_xit(rig.handle, C.int(vfo), C.int(offset))
-	return checkError(res, err, "set_xit")
+	res := C.set_xit(rig.handle, C.int(vfo), C.int(offset))
+	return checkError(res, nil, "set_xit")
 }
 
 // Get Xit offset value
 func (rig *Rig) GetXit(vfo VFOType) (offset int, err error) {
 	var o C.long
-	res, err := C.get_xit(rig.handle, C.int(vfo), &o)
+	res := C.get_xit(rig.handle, C.int(vfo), &o)
 	offset = int(o)
-	return offset, checkError(res, err, "get_xit")
+	return offset, checkError(res, nil, "get_xit")
 }
 
 // Set Split Frequency
 func (rig *Rig) SetSplitFreq(vfo VFOType, txFreq float64) error {
-	res, err := C.set_split_freq(rig.handle, C.int(vfo), C.double(txFreq))
-	return checkError(res, err, "set_split_freq")
+	res := C.set_split_freq(rig.handle, C.int(vfo), C.double(txFreq))
+	return checkError(res, nil, "set_split_freq")
 }
 
 // Get Split Frequency
 func (rig *Rig) GetSplitFreq(vfo VFOType) (txFreq float64, err error) {
 	var f C.double
-	res, err := C.get_split_freq(rig.handle, C.int(vfo), &f)
+	res := C.get_split_freq(rig.handle, C.int(vfo), &f)
 	txFreq = float64(f)
-	return txFreq, checkError(res, err, "get_split_freq")
+	return txFreq, checkError(res, nil, "get_split_freq")
 }
 
 // Set Split Mode
 func (rig *Rig) SetSplitMode(vfo VFOType, txMode Mode, txWidth int) error {
-	res, err := C.set_split_mode(rig.handle, C.int(vfo), C.int(txMode), C.int(txWidth))
-	return checkError(res, err, "set_split_mode")
+	res := C.set_split_mode(rig.handle, C.int(vfo), C.int(txMode), C.int(txWidth))
+	return checkError(res, nil, "set_split_mode")
 }
 
 // Get Split Mode
 func (rig *Rig) GetSplitMode(vfo VFOType) (txMode Mode, txWidth int, err error) {
 	var m C.int
 	var w C.long
-	res, err := C.get_split_mode(rig.handle, C.int(vfo), &m, &w)
+	res := C.get_split_mode(rig.handle, C.int(vfo), &m, &w)
 	txMode = Mode(m)
 	txWidth = int(w)
-	return txMode, txWidth, checkError(res, err, "get_split_mode")
+	return txMode, txWidth, checkError(res, nil, "get_split_mode")
 }
 
 // Set Split Vfo
 func (rig *Rig) SetSplitVfo(vfo VFOType, split int, txVfo VFOType) error {
-	res, err := C.set_split_vfo(rig.handle, C.int(vfo), C.int(split), C.int(txVfo))
-	return checkError(res, err, "set_split_vfo")
+	res := C.set_split_vfo(rig.handle, C.int(vfo), C.int(split), C.int(txVfo))
+	return checkError(res, nil, "set_split_vfo")
 }
 
 // Get Split Vfo
 func (rig *Rig) GetSplitVfo(vfo VFOType) (split int, txVfo VFOType, err error) {
 	var s C.int
 	var v C.int
-	res, err := C.get_split_vfo(rig.handle, C.int(vfo), &s, &v)
+	res := C.get_split_vfo(rig.handle, C.int(vfo), &s, &v)
 	split = int(s)
 	txVfo = VFOType(v)
-	return split, txVfo, checkError(res, err, "get_split_vfo")
+	return split, txVfo, checkError(res, nil, "get_split_vfo")
 }
 
 // Get Split (shortcut for GetSplitVfo)
 func (rig *Rig) GetSplit(vfo VFOType) (split int, txVfo VFOType, err error) {
 	var s C.int
 	var t C.int
-	res, err := C.get_split_vfo(rig.handle, C.int(vfo), &s, &t)
+	res := C.get_split_vfo(rig.handle, C.int(vfo), &s, &t)
 	split = int(s)
 	txVfo = VFOType(t)
-	return split, txVfo, checkError(res, err, "get_split")
+	return split, txVfo, checkError(res, nil, "get_split")
 }
 
 // SetPowerState sets the Rig Power On/Off/Standby state
 func (rig *Rig) SetPowerState(status Power) error {
-	res, err := C.set_powerstat(rig.handle, C.int(status))
-	return checkError(res, err, "set_powerstat")
+	res := C.set_powerstat(rig.handle, C.int(status))
+	return checkError(res, nil, "set_powerstat")
 }
 
 // GetPowerStat gets the Rig Power On/Off/Standby state
 func (rig *Rig) GetPowerState() (status Power, err error) {
 	var s C.int
 	var res C.int
-	res, err = C.get_powerstat(rig.handle, &s)
+	res = C.get_powerstat(rig.handle, &s)
 	status = Power(s)
-	return status, checkError(res, err, "get_powerstat")
+	return status, checkError(res, nil, "get_powerstat")
 }
 
 // Get Rig info
@@ -393,8 +393,8 @@ func (rig *Rig) GetInfo() (info string, err error) {
 
 // Set Antenna
 func (rig *Rig) SetAnt(vfo VFOType, ant int) error {
-	res, err := C.set_ant(rig.handle, C.int(vfo), C.int(ant))
-	return checkError(res, err, "set_ant")
+	res := C.set_ant(rig.handle, C.int(vfo), C.int(ant))
+	return checkError(res, nil, "set_ant")
 }
 
 // Get Antenna
@@ -422,9 +422,9 @@ func (rig *Rig) GetTs(vfo VFOType) (ts int, err error) {
 // has supports getting a specific level
 func (rig *Rig) HasGetLevel(level uint32) (res uint32, err error) {
 	var c C.ulong
-	c = C.has_get_level(rig.handle, C.ulong(level))
+	c, err = C.has_get_level(rig.handle, C.ulong(level))
 	res = uint32(c)
-	return res, checkError(C.int(c), nil, "has_get_level")
+	return res, checkError(0, err, "has_get_level")
 }
 
 // get the best frequency resolution for this rig (minimum step size)
@@ -479,15 +479,15 @@ func (rig *Rig) HasSetParm(parm uint32) (res uint32, err error) {
 func (rig *Rig) GetLevel(vfo VFOType, level uint32) (value float32, err error) {
 	var v C.float
 	var res C.int
-	res, err = C.get_level(rig.handle, C.int(vfo), C.ulong(level), &v)
+	res = C.get_level(rig.handle, C.int(vfo), C.ulong(level), &v)
 	value = float32(v)
-	return value, checkError(res, err, "get_level")
+	return value, checkError(res, nil, "get_level")
 }
 
 //set Level
 func (rig *Rig) SetLevel(vfo VFOType, level uint32, value float32) error {
-	res, err := C.set_level(rig.handle, C.int(vfo), C.ulong(level), C.float(value))
-	return checkError(res, err, "set_level")
+	res := C.set_level(rig.handle, C.int(vfo), C.ulong(level), C.float(value))
+	return checkError(res, nil, "set_level")
 }
 
 //Get granularity (stepsize, minimum, maximum) for a Level
@@ -496,8 +496,8 @@ func (rig *Rig) GetLevelGran(level uint32) (step float32, min float32, max float
 	var cMin C.float
 	var cMax C.float
 
-	res, err := C.get_level_gran(rig.handle, C.ulong(level), &cStep, &cMin, &cMax)
-	if checkError(res, err, "get_level_gran") != nil {
+	res := C.get_level_gran(rig.handle, C.ulong(level), &cStep, &cMin, &cMax)
+	if checkError(res, nil, "get_level_gran") != nil {
 		return 0, 0, 0, err
 	}
 
@@ -508,12 +508,12 @@ func (rig *Rig) GetLevelGran(level uint32) (step float32, min float32, max float
 func (rig *Rig) GetFunc(vfo VFOType, function uint32) (value bool, err error) {
 	var v C.int
 	var res C.int
-	res, err = C.get_func(rig.handle, C.int(vfo), C.ulong(function), &v)
+	res = C.get_func(rig.handle, C.int(vfo), C.ulong(function), &v)
 	value, err2 := CIntToBool(v)
 	if err2 != nil { //not so nice...
 		return value, checkError(0, err2, "get_func")
 	}
-	return value, checkError(res, err, "get_func")
+	return value, checkError(res, nil, "get_func")
 }
 
 //set Function
@@ -523,23 +523,23 @@ func (rig *Rig) SetFunc(vfo VFOType, function uint32, value bool) error {
 	if err != nil {
 		return checkError(0, err, "set_func")
 	}
-	res, err := C.set_func(rig.handle, C.int(vfo), C.ulong(function), v)
-	return checkError(res, err, "set_func")
+	res := C.set_func(rig.handle, C.int(vfo), C.ulong(function), v)
+	return checkError(res, nil, "set_func")
 }
 
 //get Parameter
 func (rig *Rig) GetParm(vfo VFOType, parm uint32) (value float32, err error) {
 	var v C.float
 	var res C.int
-	res, err = C.get_parm(rig.handle, C.ulong(parm), &v)
+	res = C.get_parm(rig.handle, C.ulong(parm), &v)
 	value = float32(v)
-	return value, checkError(res, err, "get_parm")
+	return value, checkError(res, nil, "get_parm")
 }
 
 //set Parameter
 func (rig *Rig) SetParm(vfo VFOType, parm uint32, value float32) error {
-	res, err := C.set_parm(rig.handle, C.ulong(parm), C.float(value))
-	return checkError(res, err, "set_parm")
+	res := C.set_parm(rig.handle, C.ulong(parm), C.float(value))
+	return checkError(res, nil, "set_parm")
 }
 
 //Get granularity (stepsize, minimum, maximum) for a Parameter
@@ -548,8 +548,8 @@ func (rig *Rig) GetParmGran(parm uint32) (step float32, min float32, max float32
 	var cMin C.float
 	var cMax C.float
 
-	res, err := C.get_parm_gran(rig.handle, C.ulong(parm), &cStep, &cMin, &cMax)
-	if checkError(res, err, "get_parm_gran") != nil {
+	res := C.get_parm_gran(rig.handle, C.ulong(parm), &cStep, &cMin, &cMax)
+	if err := checkError(res, nil, "get_parm_gran"); err != nil {
 		return 0, 0, 0, err
 	}
 
@@ -558,8 +558,8 @@ func (rig *Rig) GetParmGran(parm uint32) (step float32, min float32, max float32
 
 //Set configuration token
 func (rig *Rig) SetConf(token string, val string) error {
-	res, err := C.set_conf(rig.handle, C.CString(token), C.CString(val))
-	return checkError(res, err, "set_conf")
+	res := C.set_conf(rig.handle, C.CString(token), C.CString(val))
+	return checkError(res, nil, "set_conf")
 }
 
 //HasToken checks if the rig supports a given token
@@ -567,7 +567,7 @@ func (rig *Rig) HasToken(token string) bool {
 	//dirty hack - provide fix length char*
 	//there should be a better way
 
-	res, _ := C.has_token(rig.handle, C.CString(token))
+	res := C.has_token(rig.handle, C.CString(token))
 
 	if HamlibErrorCode(res) == HamlibErrOK {
 		return true
@@ -582,17 +582,17 @@ func (rig *Rig) GetConf(token string) (val string, err error) {
 	//there should be a better way
 	v := C.CString("                                                          ")
 
-	res, err := C.get_conf(rig.handle, C.CString(token), v)
+	res := C.get_conf(rig.handle, C.CString(token), v)
 	val = C.GoString(v)
 	C.free(unsafe.Pointer(v))
 
-	return val, checkError(res, err, "get_conf")
+	return val, checkError(res, nil, "get_conf")
 }
 
 //Execute VFO Operation
 func (rig *Rig) VfoOp(vfo VFOType, op VFOOp) error {
-	res, err := C.vfo_op(rig.handle, C.int(vfo), C.int(op))
-	return checkError(res, err, "vfo_op")
+	res := C.vfo_op(rig.handle, C.int(vfo), C.int(op))
+	return checkError(res, nil, "vfo_op")
 }
 
 //Copy capabilities into Rig->Caps struct
@@ -683,9 +683,9 @@ func (rig *Rig) getCaps() error {
 //get Capabilities > Max Rit
 func (rig *Rig) getMaxRit() error {
 	var rit C.int
-	res, err := C.get_caps_max_rit(rig.handle, &rit)
-	if checkError(res, err, "get_caps_max_rit") != nil {
-		return checkError(res, err, "get_caps_max_rit")
+	res := C.get_caps_max_rit(rig.handle, &rit)
+	if err := checkError(res, nil, "get_caps_max_rit"); err != nil {
+		return err
 	}
 	rig.Caps.MaxRit = int(rit)
 	return nil
@@ -694,9 +694,9 @@ func (rig *Rig) getMaxRit() error {
 //get Capabilities > Max Xit
 func (rig *Rig) getMaxXit() error {
 	var xit C.int
-	res, err := C.get_caps_max_xit(rig.handle, &xit)
-	if checkError(res, err, "get_caps_max_xit") != nil {
-		return checkError(res, err, "get_caps_max_xit")
+	res := C.get_caps_max_xit(rig.handle, &xit)
+	if err := checkError(res, nil, "get_caps_max_xit"); err != nil {
+		return err
 	}
 	rig.Caps.MaxXit = int(xit)
 	return nil
@@ -705,9 +705,9 @@ func (rig *Rig) getMaxXit() error {
 //get Capabilities > Max IF Shift
 func (rig *Rig) getMaxIfShift() error {
 	var ifShift C.int
-	res, err := C.get_caps_max_if_shift(rig.handle, &ifShift)
-	if checkError(res, err, "get_caps_max_if_shift") != nil {
-		return checkError(res, err, "get_caps_max_if_shift")
+	res := C.get_caps_max_if_shift(rig.handle, &ifShift)
+	if err := checkError(res, nil, "get_caps_max_if_shift"); err != nil {
+		return err
 	}
 	rig.Caps.MaxIfShift = int(ifShift)
 	return nil
@@ -778,9 +778,9 @@ func (rig *Rig) getVfos() error {
 	var vfoClist C.int
 	var vfoList []string
 
-	res, err := C.get_supported_vfos(rig.handle, &vfoClist)
-	if checkError(res, err, "get_supported_vfos") != nil {
-		return checkError(res, err, "get_supported_vfos")
+	res := C.get_supported_vfos(rig.handle, &vfoClist)
+	if err := checkError(res, nil, "get_supported_vfos"); err != nil {
+		return err
 	}
 
 	for vfo, vfoStr := range VFOName {
@@ -798,9 +798,9 @@ func (rig *Rig) getOperations() error {
 	var vfoOpClist C.int
 	var vfoOpList []string
 
-	res, err := C.get_supported_vfo_operations(rig.handle, &vfoOpClist)
-	if checkError(res, err, "get_supported_vfo_operations") != nil {
-		return checkError(res, err, "get_supported_vfo_operations")
+	res := C.get_supported_vfo_operations(rig.handle, &vfoOpClist)
+	if err := checkError(res, nil, "get_supported_vfo_operations"); err != nil {
+		return err
 	}
 
 	for op, opStr := range VFOOperationName {
@@ -818,9 +818,9 @@ func (rig *Rig) getModes() error {
 	var modesClist C.int
 	var modesList []string
 
-	res, err := C.get_supported_modes(rig.handle, &modesClist)
-	if checkError(res, err, "get_supported_modes") != nil {
-		return checkError(res, err, "get_supported_modes")
+	res := C.get_supported_modes(rig.handle, &modesClist)
+	if err := checkError(res, nil, "get_supported_modes"); err != nil {
+		return err
 	}
 
 	for mode, modeStr := range ModeName {
@@ -1010,15 +1010,15 @@ func (rig *Rig) getFilters() error {
 	var filterMap map[string][]int
 	filterMap = make(map[string][]int)
 
-	res, err := C.get_filter_count(rig.handle, &cfc)
-	if checkError(res, err, "get_filter_count") != nil {
-		return checkError(res, err, "get_filter_count")
+	res := C.get_filter_count(rig.handle, &cfc)
+	if err := checkError(res, nil, "get_filter_count"); err != nil {
+		return err
 	}
 
 	for i := 0; i < int(cfc); i++ {
-		res, err = C.get_filter_mode_width(rig.handle, C.int(i), &cMode, &cWidth)
-		if checkError(res, err, "") != nil {
-			return checkError(res, err, "get_filter_mode_width")
+		res = C.get_filter_mode_width(rig.handle, C.int(i), &cMode, &cWidth)
+		if err := checkError(res, nil, ""); err != nil {
+			return err
 		}
 		for mode, modeStr := range ModeName {
 			if int(cMode)&int(mode) > 0 {
@@ -1040,15 +1040,15 @@ func (rig *Rig) getTuningSteps() error {
 	var tsMap map[string][]int
 	tsMap = make(map[string][]int)
 
-	res, err := C.get_ts_count(rig.handle, &tsc)
-	if checkError(res, err, "get_ts_count") != nil {
-		return checkError(res, err, "get_ts_count")
+	res := C.get_ts_count(rig.handle, &tsc)
+	if err := checkError(res, nil, "get_ts_count"); err != nil {
+		return err
 	}
 
 	for i := 0; i < int(tsc); i++ {
-		res, err = C.get_tuning_steps(rig.handle, C.int(i), &cMode, &cTs)
-		if checkError(res, err, "") != nil {
-			return checkError(res, err, "get_tuning_steps")
+		res = C.get_tuning_steps(rig.handle, C.int(i), &cMode, &cTs)
+		if err := checkError(res, nil, ""); err != nil {
+			return err
 		}
 		for mode, modeStr := range ModeName {
 			if int(cMode)&int(mode) > 0 {
@@ -1297,14 +1297,14 @@ func (rig *Rig) hasGetConf() {
 
 //Close the Communication with the Radio
 func (rig *Rig) Close() error {
-	res, err := C.close_rig(rig.handle)
-	return checkError(res, err, "close_rig")
+	res := C.close_rig(rig.handle)
+	return checkError(res, nil, "close_rig")
 }
 
 //Grabage collect Radio and free up memory
 func (rig *Rig) Cleanup() error {
-	res, err := C.cleanup_rig(rig.handle)
-	return checkError(res, err, "cleanup_rig")
+	res := C.cleanup_rig(rig.handle)
+	return checkError(res, nil, "cleanup_rig")
 }
 
 // Check Errors from Hamlib C calls. C Errors have a higher priority.
